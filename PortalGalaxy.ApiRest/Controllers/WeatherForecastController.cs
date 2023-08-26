@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PortalGalaxy.Common;
 
 namespace PortalGalaxy.ApiRest.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize(Roles = Constantes.RolAlumno)]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

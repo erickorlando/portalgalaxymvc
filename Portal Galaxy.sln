@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "04. API REST", "04. API RES
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalGalaxy.UnitTests", "PortalGalaxy.UnitTests\PortalGalaxy.UnitTests.csproj", "{A393A674-C446-4C53-817E-E12E6A24B8F5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortalGalaxy.Common", "PortalGalaxy.Common\PortalGalaxy.Common.csproj", "{B5504130-642E-4546-93F1-EAC6B17B321A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{A393A674-C446-4C53-817E-E12E6A24B8F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A393A674-C446-4C53-817E-E12E6A24B8F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A393A674-C446-4C53-817E-E12E6A24B8F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5504130-642E-4546-93F1-EAC6B17B321A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5504130-642E-4546-93F1-EAC6B17B321A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5504130-642E-4546-93F1-EAC6B17B321A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5504130-642E-4546-93F1-EAC6B17B321A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,6 +102,7 @@ Global
 		{FCEEAEA1-4B96-4350-B6B7-A0FDD1890311} = {06D66E8C-E9B0-4F90-A8C2-E4BDCCB754AD}
 		{44C37162-B5E8-4A27-91B6-36967E75FDB3} = {06D66E8C-E9B0-4F90-A8C2-E4BDCCB754AD}
 		{A393A674-C446-4C53-817E-E12E6A24B8F5} = {FCEEAEA1-4B96-4350-B6B7-A0FDD1890311}
+		{B5504130-642E-4546-93F1-EAC6B17B321A} = {FDD25DBF-C1BE-478F-97E0-8A943B54B319}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {39FBAA48-4AB7-4C4E-AA59-8514F57CE250}
