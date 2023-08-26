@@ -4,8 +4,10 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using PortalGalaxy.Common;
 using PortalGalaxy.DataAccess;
+using PortalGalaxy.Entities;
 using PortalGalaxy.Models;
 using PortalGalaxy.Models.Response;
+using PortalGalaxy.Repositories.Interfaces;
 using PortalGalaxy.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security;
@@ -19,11 +21,14 @@ namespace PortalGalaxy.Services.Implementaciones
         private readonly UserManager<GalaxyIdentityUser> _userManager;
         private readonly AppConfiguration _configuration;
         private readonly ILogger<UserService> _logger;
+        private readonly IAlumnoRepository _repository;
 
         public UserService(UserManager<GalaxyIdentityUser> userManager,
             IOptions<AppConfiguration> options,
-            ILogger<UserService> logger)
+            ILogger<UserService> logger,
+            IAlumnoRepository repository)
         {
+            _repository = repository;
             _logger = logger;
             _userManager = userManager;
             _configuration = options.Value;
@@ -123,6 +128,18 @@ namespace PortalGalaxy.Services.Implementaciones
                         await _userManager.AddToRoleAsync(user, Constantes.RolAlumno);
 
                         // TODO: Aqui debemos registrar el alumno en la tabla de alumnos
+                        var alumno = new Alumno
+                        {
+                            NombreCompleto = request.NombreCompleto,
+                            Correo = request.Email,
+                            Telefono = request.Telefono,
+                            NroDocumento = "11334454",
+                            Departamento = "01",
+                            Provincia = "01",
+                            Distrito = "01"
+                        };
+
+                        await _repository.AddAsync(alumno);
 
                         // TODO: Enviar un email
                     }

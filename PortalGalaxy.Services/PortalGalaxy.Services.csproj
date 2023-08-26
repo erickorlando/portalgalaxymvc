@@ -15,6 +15,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\PortalGalaxy.DataAccess\PortalGalaxy.DataAccess.csproj" />
 		<ProjectReference Include="..\PortalGalaxy.Models\PortalGalaxy.Models.csproj" />
+		<ProjectReference Include="..\PortalGalaxy.Repositories\PortalGalaxy.Repositories.csproj" />
 	</ItemGroup>
 
 </Project>

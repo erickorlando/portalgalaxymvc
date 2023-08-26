@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using PortalGalaxy.Common;
 using PortalGalaxy.DataAccess;
+using PortalGalaxy.Repositories.Implementaciones;
+using PortalGalaxy.Repositories.Interfaces;
 using PortalGalaxy.Services.Implementaciones;
 using PortalGalaxy.Services.Interfaces;
 using Serilog;
@@ -54,6 +56,8 @@ builder.Services.AddIdentity<GalaxyIdentityUser, IdentityRole>(policies =>
 
 // Inyectamos las dependencias
 builder.Services.AddTransient<IUserService, UserService>();
+
+builder.Services.AddTransient<IAlumnoRepository, AlumnoRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
