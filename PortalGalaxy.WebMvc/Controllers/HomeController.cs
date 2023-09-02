@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using PortalGalaxy.Common;
 using PortalGalaxy.WebMvc.Models;
 using System.Diagnostics;
 
@@ -18,6 +20,7 @@ namespace PortalGalaxy.WebMvc.Controllers
             return View();
         }
 
+        [Authorize(Roles = Constantes.RolAdmin)]
         public IActionResult Privacy()
         {
             return View();

@@ -6,4 +6,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PortalGalaxy.Common\PortalGalaxy.Common.csproj" />
+    <ProjectReference Include="..\PortalGalaxy.Models\PortalGalaxy.Models.csproj" />
+    <ProjectReference Include="..\PortalGalaxy.ViewModels\PortalGalaxy.ViewModels.csproj" />
+  </ItemGroup>
+
 </Project>
