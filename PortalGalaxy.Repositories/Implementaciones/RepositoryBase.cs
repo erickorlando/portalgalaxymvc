@@ -2,9 +2,7 @@
 using PortalGalaxy.DataAccess;
 using PortalGalaxy.Entities;
 using PortalGalaxy.Repositories.Interfaces;
-using System;
 using System.Linq.Expressions;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace PortalGalaxy.Repositories.Implementaciones
 {
@@ -93,6 +91,39 @@ namespace PortalGalaxy.Repositories.Implementaciones
                   .AsQueryable()
                   .Select(selector)
                   .ToListAsync();
+        }
+
+        public async Task<(ICollection<TInfo> Collection, int Total)> ListAsync<TInfo, TKey>
+            (
+            Expression<Func<TEntity, bool>> predicate,
+            Expression<Func<TEntity, TInfo>> selector,
+            Expression<Func<TEntity, TKey>> orderBy,
+            string? relationships,
+            int page, int rows)
+        {
+            var query = Context.Set<TEntity>()
+                .Where(predicate)
+                .AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(relationships))
+            {
+                foreach (var tabla in relationships.Split(',', StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(tabla);
+                }
+            }
+
+            var collection = await query.OrderBy(orderBy)
+                .Skip((page - 1) * rows)
+                .Take(rows)
+                .Select(selector)
+                .ToListAsync();
+
+            var total = await Context.Set<TEntity>()
+                .Where(predicate)
+                .CountAsync();
+
+            return (collection, total);
         }
     }
 }

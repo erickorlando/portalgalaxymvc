@@ -20,6 +20,11 @@ namespace PortalGalaxy.Services.Profiles
             CreateMap<Alumno, AlumnoDtoResponse>();
 
             CreateMap<AlumnoDtoRequest, Alumno>();
+
+            CreateMap<Taller, TallerDtoResponse>()
+                .ForMember(d => d.Fecha, o => o.MapFrom(x => $"{x.FechaInicio:dd/MM/yyyy} {x.HoraInicio:hh:mm tt}"));
+
+            CreateMap<TallerDtoRequest, Taller>();
         }
     }
 }

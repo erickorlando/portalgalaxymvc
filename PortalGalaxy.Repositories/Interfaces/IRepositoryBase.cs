@@ -18,6 +18,13 @@ namespace PortalGalaxy.Repositories.Interfaces
             Expression<Func<TEntity, TInfo>> selector,
             string? relationships = null);
 
+        Task<(ICollection<TInfo> Collection, int Total)> ListAsync<TInfo, TKey>(
+            Expression<Func<TEntity, bool>> predicate,
+            Expression<Func<TEntity, TInfo>> selector,
+            Expression<Func<TEntity, TKey>> orderBy,
+            string? relationships,
+            int page, int rows);
+
         /// <summary>
         /// Lista de objetos del EntityBase con un selector y sin predicado
         /// </summary>

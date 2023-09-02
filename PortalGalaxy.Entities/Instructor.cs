@@ -7,5 +7,9 @@
         public Categoria Categoria { get; set; } = default!;
         public int CategoriaId { get; set; }
 
+        public override string ToString()
+        {
+            return Nombres;
+        }
     }
 }
