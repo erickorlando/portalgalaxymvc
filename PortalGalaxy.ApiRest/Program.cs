@@ -8,17 +8,18 @@ using PortalGalaxy.Repositories.Implementaciones;
 using PortalGalaxy.Repositories.Interfaces;
 using PortalGalaxy.Services.Implementaciones;
 using PortalGalaxy.Services.Interfaces;
+using PortalGalaxy.Services.Profiles;
 using Serilog;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var logger = new LoggerConfiguration()
-    .WriteTo.Console()
-    .CreateLogger();
+//var logger = new LoggerConfiguration()
+//    .WriteTo.Console()
+//    .CreateLogger();
 
-builder.Logging.ClearProviders();
-builder.Logging.AddSerilog(logger);
+//builder.Logging.ClearProviders();
+//builder.Logging.AddSerilog(logger);
 
 // Vamos a leer el archivo de configuracion con una clase mapeada
 builder.Services.Configure<AppConfiguration>(builder.Configuration);
@@ -55,9 +56,20 @@ builder.Services.AddIdentity<GalaxyIdentityUser, IdentityRole>(policies =>
 
 
 // Inyectamos las dependencias
+
+// AutoMapper
+
+builder.Services.AddAutoMapper(config =>
+{
+    config.AddProfile<PortalGalaxyProfile>();
+});
+
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<ICategoriaService, CategoriaService>();
+builder.Services.AddTransient<IAlumnoService, AlumnoService>();
 
 builder.Services.AddTransient<IAlumnoRepository, AlumnoRepository>();
+builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -100,6 +112,11 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 // Validacion de permisos
 app.UseAuthorization();
+
+app.MapGet("api/Categorias", async (ICategoriaService service) =>
+{
+    return Results.Ok(await service.ListAsync());
+});
 
 app.MapControllers();
 

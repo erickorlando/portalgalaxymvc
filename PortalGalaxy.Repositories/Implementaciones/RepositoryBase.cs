@@ -2,7 +2,9 @@
 using PortalGalaxy.DataAccess;
 using PortalGalaxy.Entities;
 using PortalGalaxy.Repositories.Interfaces;
+using System;
 using System.Linq.Expressions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace PortalGalaxy.Repositories.Implementaciones
 {
@@ -83,6 +85,14 @@ namespace PortalGalaxy.Repositories.Implementaciones
             {
                 throw new InvalidOperationException($"No se encontro el registro con el id {id}");
             }
+        }
+
+        public async Task<ICollection<TInfo>> ListAsync<TInfo>(Expression<Func<TEntity, TInfo>> selector)
+        {
+            return await Context.Set<TEntity>()
+                  .AsQueryable()
+                  .Select(selector)
+                  .ToListAsync();
         }
     }
 }

@@ -22,6 +22,8 @@ namespace PortalGalaxy.DataAccess.Configurations
                 new() { Id = 4, Nombre = "Azure", FechaCreacion = fecha},
                 new() { Id = 5, Nombre = "Python", FechaCreacion = fecha},
             });
+
+            builder.HasQueryFilter(p => p.Estado);
         }
     }
 }

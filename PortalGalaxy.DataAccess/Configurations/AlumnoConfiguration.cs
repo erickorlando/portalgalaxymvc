@@ -28,6 +28,8 @@ namespace PortalGalaxy.DataAccess.Configurations
 
             builder.Property(p => p.Distrito)
                 .HasMaxLength(5);
+
+            builder.HasQueryFilter(p => p.Estado);
         }
     }
 

@@ -19,6 +19,12 @@ namespace PortalGalaxy.Repositories.Interfaces
             string? relationships = null);
 
         /// <summary>
+        /// Lista de objetos del EntityBase con un selector y sin predicado
+        /// </summary>
+        Task<ICollection<TInfo>> ListAsync<TInfo>(
+            Expression<Func<TEntity, TInfo>> selector);
+
+        /// <summary>
         /// Crear un registro
         /// </summary>
         Task<int> AddAsync(TEntity entity);
