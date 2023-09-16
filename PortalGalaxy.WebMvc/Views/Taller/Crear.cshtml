@@ -1,0 +1,97 @@
+﻿@model FormTallerViewModel
+
+@{
+    ViewBag.Title = "Crear Taller";
+    Layout = "_Layout";
+}
+
+<h2 class="text-uppercase mt-2 mb-5">Crear Taller</h2>
+
+<form method="post">
+    <div class="row gx-5 mb-3">
+        <div class="col-7">
+            @Html.LabelFor(m => m.Input.Nombre, new { @class = "form-label"})
+            @Html.TextBoxFor(m => m.Input.Nombre, new { @class = "form-control"})
+        </div>
+        <div class="col-5">
+            @Html.LabelFor(m => m.Input.CategoriaId, new { @class = "form-label"})
+            @Html.DropDownListFor(m => m.Input.CategoriaId,
+                new SelectList(Model.Categorias, "Id", "Nombre"), "Todos", new { @class = "form-select"})
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            @Html.LabelFor(m => m.Input.InstructorId, new { @class = "form-label"})
+            <div class="input-group">
+                <input type="text" class="form-control" id="instructor"/>
+                <span class="input-group-text" id="addon-instructor"><i class="bi bi-person-bounding-box"></i></span>
+            </div>
+            @Html.HiddenFor(m => m.Input.InstructorId, new { id = "hiddenInstructorId"})
+        </div>
+        <div class="col">
+            <label asp-for="Input.FechaInicio" class="form-label"></label>
+            <input type="date" asp-for="Input.FechaInicio" asp-format="dd/MM/yyyy" class="form-control"/>
+        </div>
+        <div class="col">
+            <label asp-for="Input.HoraInicio" class="form-label"></label>
+            <input type="time" asp-for="Input.HoraInicio" asp-format="HH:mm" class="form-control"/>
+        </div>
+        <div class="col">
+            @Html.LabelFor(m => m.Input.Situacion, new { @class = "form-label"})
+            @Html.DropDownListFor(m => m.Input.Situacion, 
+                new SelectList(Model.Situaciones, "Codigo", "Nombre"), "Todos", new { @class = "form-select"})
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col">
+            <label asp-for="Input.Base64Portada" class="form-label"></label>    
+            <input asp-for="Input.Base64Portada" type="file" class="form-control" accept="image/png, image/jpeg, image/webp" id="imageInput" name="imageFile"/>
+        </div>
+        <div class="col">
+            <label asp-for="Input.Base64Temario" class="form-label"></label>
+            <input asp-for="Input.Base64Temario" type="file" class="form-control" accept="application/vnd.ms-powerpoint, application/pdf" id="pdfInput" name="pdfFile"/>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-5">
+            <div class="card">
+                <div class="card-header bg-dark">
+                    <label class="text-white">Vista Previa</label>
+                </div>
+                <div class="card-body text-center">
+                    @if (string.IsNullOrEmpty(Model.Input.UrlPortada))
+                    {
+                        <img id="preview" src="~/assets/images/sinimagen.jpeg" alt="@Model.Input.Nombre" style="width: 300px"/>
+                    }
+                    else
+                    {
+                        <img id="preview" src="@Model.Input.UrlPortada" alt="@Model.Input.Nombre" style="width: 300px"/>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col offset-4">
+            <a asp-controller="Taller" asp-action="Index" class="btn btn-outline-primary"><i class="bi bi-x-circle me-1"></i>Cancelar</a>
+        </div>
+        <div class="col">
+            <button type="submit" class="btn btn-primary"><i class="bi bi-arrow-right-circle me-1"></i>Guardar</button>
+        </div>
+    </div>
+</form>
+<script>
+    document.getElementById("imageInput").addEventListener("change", function() {
+        var previewImage = document.getElementById("preview");
+        var imageInput = this;
+
+        if (imageInput.files && imageInput.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                previewImage.style.display = "block";
+            };
+
+            reader.readAsDataURL(imageInput.files[0]);
+        }
+    });
+</script>

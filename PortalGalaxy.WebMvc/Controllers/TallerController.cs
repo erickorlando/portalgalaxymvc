@@ -51,4 +51,19 @@ public class TallerController : Controller
 
         return View(model);
     }
+
+    public async Task<IActionResult> Crear()
+    {
+        var vm = new FormTallerViewModel
+        {
+            Categorias = await _categoriaProxy.ListAsync(),
+            Input = new TallerDtoRequest
+            {
+                FechaInicio = DateTime.Today,
+                HoraInicio = DateTime.Now
+            }
+        };
+
+        return View(vm);
+    }
 }
