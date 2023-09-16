@@ -1,0 +1,140 @@
+﻿@model TallerViewModel
+
+@{
+    ViewBag.Title = "Talleres";
+    Layout = "_Layout";
+}
+
+<h2 class="text-uppercase mb-5">Listado de Talleres</h2>
+
+<form>
+    <div class="row">
+        <div class="col">
+            <div class="mb-3">
+                @Html.LabelFor(m => m.Nombre, new { @class = "form-label"})
+                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control"})
+            </div>
+        </div>
+        <div class="col-3">
+            @Html.LabelFor(m => m.CategoriaSeleccionada, new { @class = "form-label"})
+            @Html.DropDownListFor(m => m.CategoriaSeleccionada, 
+                new SelectList(Model.Categorias, "Id", "Nombre"), "Todos", new { @class = "form-select"})
+        </div>
+        <div class="col-3">
+            @Html.LabelFor(m => m.SituacionSeleccionada, new { @class = "form-label"})
+            @Html.DropDownListFor(m => m.SituacionSeleccionada, 
+                new SelectList(Model.Situaciones, "Codigo", "Nombre"), "Todos", new { @class = "form-select"})
+        </div>
+    </div>
+    <div class="row mt-3 justify-content-end">
+        <div class="col-auto">
+            <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search me-1"></i>Buscar</button>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-outline-primary" type="reset"><i class="bi bi-eraser-fill me-1"></i>Limpiar</button>
+        </div>
+        <div class="col-auto">
+            <a class="btn btn-primary" type="submit"><i class="bi bi-plus-circle me-1"></i>Nuevo</a>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            Mostrar 
+            <select id="pageSize" class="form-select-sm" asp-for="Rows">
+                <option>5</option>
+                <option>10</option>
+                <option>15</option>
+                <option>20</option>
+                <option>50</option>
+            </select>
+            registros
+        </div>
+    </div>
+    <div class="row mt-4">
+        @if (Model.Talleres is null)
+        {
+            <p>Sin resultados</p>
+        }
+        else if (!Model.Talleres.Any())
+        {
+            <p>Sin datos para mostrar</p>
+        }
+        else
+        {
+            <table class="table table-hover">
+                <thead>
+                <tr class="table-primary">
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Categoria</th>
+                    <th>Instructor</th>
+                    <th>Fecha</th>
+                    <th>Situacion</th>
+                    <th>Acción</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.Talleres)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.Categoria</td>
+                        <td>@item.Instructor</td>
+                        <td>@item.Fecha</td>
+                        <td>@item.Situacion</td>
+                        <td>
+                            <i class="bi bi-check2-circle"></i>
+                            <i class="bi bi-pencil-fill"></i>
+                            <i class="bi bi-trash3-fill"></i>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+    </div>
+    <div class="row justify-content-end">
+        <div class="col-auto">
+            <button class="btn btn-outline-danger"><i class="bi bi-filetype-pdf me-1"></i>Exportar</button>
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-outline-success"><i class="bi bi-file-excel me-1"></i>Exportar</button>
+        </div>
+    </div>
+    <div class="container">
+        <partial name="_DataPager" model="ViewBag.Pager"/>
+        @Html.HiddenFor(m => m.Page, new { id = "currentPage"})
+    </div>
+</form>
+
+@section Scripts
+{
+    <script>
+        function setCurrentPage(data) {
+            let hiddenValue = document.getElementById('currentPage');
+            hiddenValue.value = data;
+            console.log(data);
+        }
+
+        function setPreviousPage(data) {
+            let totalPages = @ViewBag.Pager.TotalPages;
+            if (data <= totalPages) {
+                data--;
+                if (data === 0) {
+                    data = 1;
+                }
+
+                setCurrentPage(data);
+            }
+        }
+
+        function setNextPage(data) {
+            let totalPages = @ViewBag.Pager.TotalPages;
+            if (data < totalPages) {
+                data++;
+                setCurrentPage(data);
+            }
+        }
+    </script>
+}

@@ -6,15 +6,20 @@ using PortalGalaxy.Models;
 using PortalGalaxy.WebMvc.Services.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using PortalGalaxy.WebMvc.Models;
 
 namespace PortalGalaxy.WebMvc.Controllers
 {
     public class UserController : Controller
     {
         private readonly IUserProxy _proxy;
-        public UserController(IUserProxy proxy)
+        private readonly IUbigeoProxy _ubigeoProxy;
+
+        public UserController(IUserProxy proxy, IUbigeoProxy ubigeoProxy)
         {
             _proxy = proxy;
+            _ubigeoProxy = ubigeoProxy;
         }
 
         public IActionResult Login()
@@ -59,18 +64,28 @@ namespace PortalGalaxy.WebMvc.Controllers
             }
         }
 
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
-            return View();
+            // Capturamos la URL del Frontend
+            _ubigeoProxy.UrlBase = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
+
+            var vm = new RegisterViewModel();
+
+            var listaDepartamentos = await _ubigeoProxy.ListarDepartamentos();
+
+            vm.ListaDepartamentos =
+                new List<SelectListItem>(listaDepartamentos.Select(p => new SelectListItem(p.Nombre, p.Codigo)));
+
+            return View(vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterDtoRequest modelo)
+        public async Task<IActionResult> Register(RegisterViewModel modelo)
         {
             try
             {
-                var response = await _proxy.RegisterAsync(modelo);
+                var response = await _proxy.RegisterAsync(modelo.Input);
                 if (response.Success)
                 {
                     return RedirectToAction(nameof(Login));

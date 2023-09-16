@@ -35,14 +35,14 @@ namespace PortalGalaxy.Services.Implementaciones
             catch (Exception ex)
             {
                 response.ErrorMessage = "Error al agregar";
-                _logger.LogError(ex, "{ErroMessage} {Message}", ex.Message);
+                _logger.LogError(ex, "{ErroMessage} {Message}", response.ErrorMessage, ex.Message);
             }
 
             return response;
 
         }
 
-        public async Task<PaginationResponse<TallerDtoResponse>> ListAsync(string? nombre, int categoriaId, 
+        public async Task<PaginationResponse<TallerDtoResponse>> ListAsync(string? nombre, int? categoriaId, 
             int? situacion, int page, int rows)
         {
 
@@ -50,35 +50,27 @@ namespace PortalGalaxy.Services.Implementaciones
 
             try
             {
-                //Expression<Func<Taller, bool>> predicate = x => x.Nombre.Contains(nombre ?? string.Empty)
-                //                            && x.CategoriaId == categoriaId;
+                Expression<Func<Taller, bool>> predicate = 
+                    x => x.Nombre.Contains(nombre ?? string.Empty)
+                    && (categoriaId == null || x.CategoriaId == categoriaId)
+                    && (situacion == null || x.Situacion == (SituacionTaller)situacion);
 
-                //if (situacion != null)
-                //{
-                //    predicate = x => x.Nombre.Contains(nombre ?? string.Empty)
-                //                            && x.CategoriaId == categoriaId
-                //                            && x.Situacion == (SituacionTaller)situacion.Value;
-                //}
+                var tupla = await _repository
+                    .ListAsync<TallerDtoResponse, string>(
+                        predicate: predicate,
+                        selector: x => _mapper.Map<TallerDtoResponse>(x),
+                        orderBy: p => p.Nombre,
+                        relationships: "Instructor,Categoria",
+                        page,
+                        rows);
 
-                //var tupla = await _repository
-                //    .ListAsync<TallerDtoResponse, string>(
-                //        predicate: predicate,
-                //        selector: x => _mapper.Map<TallerDtoResponse>(x),
-                //        orderBy: p => p.Nombre,
-                //        relationships: "Instructor,Categoria",
-                //        page,
-                //        rows);
+                response.Data = tupla.Collection;
+                response.TotalPages = tupla.Total / rows;
+                if (tupla.Total % rows > 0)
+                {
+                    response.TotalPages++;
+                }
 
-                //response.Data = tupla.Collection;
-                //response.TotalPages = tupla.Total / rows;
-                //if (tupla.Total % rows > 0)
-                //{
-                //    response.TotalPages++;
-                //}
-
-                var collection = await _repository.ListarTalleresAsync(nombre ?? string.Empty, categoriaId, situacion ?? 0, page, rows);
-
-                response.Data = _mapper.Map<ICollection<TallerDtoResponse>>(collection);
                 response.Success = true;
             }
             catch (Exception ex)

@@ -29,6 +29,7 @@ builder.Services.Configure<AppConfiguration>(builder.Configuration);
 builder.Services.AddDbContext<PortalGalaxyDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("GalaxyDatabase"));
+    options.EnableSensitiveDataLogging();
 });
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

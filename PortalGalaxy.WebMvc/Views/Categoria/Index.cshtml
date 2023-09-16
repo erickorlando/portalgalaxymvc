@@ -1,0 +1,26 @@
+﻿@model IEnumerable<PortalGalaxy.Models.Response.CategoriaDtoResponse>
+
+@{
+    ViewBag.Title = "Categorias";
+    Layout = "_Layout";
+}
+
+<h2>Categorias</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr class="table-primary">
+            <th>Codigo</th>
+            <th>Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Nombre</td>
+            </tr>
+        }
+    </tbody>
+</table>

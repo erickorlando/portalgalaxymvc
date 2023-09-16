@@ -16,6 +16,9 @@ builder.Services.AddSingleton(_ => new HttpClient
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddScoped<IUserProxy, UserProxy>();
+builder.Services.AddScoped<IUbigeoProxy, UbigeoProxy>();
+builder.Services.AddScoped<ICategoriaProxy, CategoriaProxy>();
+builder.Services.AddScoped<ITallerProxy, TallerProxy>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>

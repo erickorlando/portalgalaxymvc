@@ -16,4 +16,17 @@
     <ProjectReference Include="..\PortalGalaxy.ViewModels\PortalGalaxy.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Categoria\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Categoria\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Taller\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Taller\Index.cshtml" />
+  </ItemGroup>
+
 </Project>

@@ -133,10 +133,10 @@ namespace PortalGalaxy.Services.Implementaciones
                             NombreCompleto = request.NombreCompleto,
                             Correo = request.Email,
                             Telefono = request.Telefono,
-                            NroDocumento = "11334454",
-                            Departamento = "01",
-                            Provincia = "01",
-                            Distrito = "01"
+                            NroDocumento = request.NroDocumento,
+                            Departamento = request.CodigoDepartamento,
+                            Provincia = request.CodigoProvincia,
+                            Distrito = request.CodigoDistrito
                         };
 
                         await _repository.AddAsync(alumno);

@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PortalGalaxy.Models\PortalGalaxy.Models.csproj" />
+  </ItemGroup>
+
 </Project>

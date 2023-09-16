@@ -1,0 +1,35 @@
+﻿@model PaginationData
+
+<div class="row justify-content-end">
+    @if (Model.TotalPages > 1)
+    {
+        <ul class="pagination pagination-lg">
+            <li class="page-item">
+                <button type="submit" class="page-link" onclick="setPreviousPage(@Model.CurrentPage)">
+                    <i class="bi bi-arrow-left-circle"></i>
+                </button>
+            </li>
+            @for (int index = 1; index <= Model.TotalPages; index++)
+            {
+                var currentIndex = index;
+                @if (Model.CurrentPage == index)
+                {
+                    <li class="page-item active">
+                        <a class="page-link">@index</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="page-item">
+                        <button type="submit" class="page-link" onclick="setCurrentPage(@currentIndex)">@index</button>
+                    </li>
+                }
+            }
+            <li class="page-item">
+                <button type="submit" class="page-link" onclick="setNextPage(@Model.CurrentPage)">
+                    <i class="bi bi-arrow-right-circle"></i>
+                </button>
+            </li>
+        </ul>
+    }
+</div>

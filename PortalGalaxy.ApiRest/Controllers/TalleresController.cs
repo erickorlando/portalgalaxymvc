@@ -17,9 +17,9 @@ namespace PortalGalaxy.ApiRest.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(string? filter, int categoriaId, int? situacion, int page = 1, int rows = 5)
+        public async Task<IActionResult> Get([FromQuery] BusquedaTallerRequest request)
         {
-            var response = await _service.ListAsync(filter, categoriaId, situacion, page, rows);
+            var response = await _service.ListAsync(request.Filter, request.CategoriaId, request.Situacion, request.Page, request.Rows);
 
             return Ok(response);
         }
