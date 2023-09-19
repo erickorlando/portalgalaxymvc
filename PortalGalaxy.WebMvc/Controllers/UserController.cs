@@ -66,17 +66,22 @@ namespace PortalGalaxy.WebMvc.Controllers
 
         public async Task<IActionResult> Register()
         {
+            var vm = new RegisterViewModel
+            {
+                ListaDepartamentos = await CargarDepartamentos()
+            };
+
+            return View(vm);
+        }
+
+        private async Task<List<SelectListItem>> CargarDepartamentos()
+        {
             // Capturamos la URL del Frontend
             _ubigeoProxy.UrlBase = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host}";
 
-            var vm = new RegisterViewModel();
-
             var listaDepartamentos = await _ubigeoProxy.ListarDepartamentos();
 
-            vm.ListaDepartamentos =
-                new List<SelectListItem>(listaDepartamentos.Select(p => new SelectListItem(p.Nombre, p.Codigo)));
-
-            return View(vm);
+            return new List<SelectListItem>(listaDepartamentos.Select(p => new SelectListItem(p.Nombre, p.Codigo)));
         }
 
         [HttpPost]
@@ -85,6 +90,7 @@ namespace PortalGalaxy.WebMvc.Controllers
         {
             try
             {
+                
                 var response = await _proxy.RegisterAsync(modelo.Input);
                 if (response.Success)
                 {
@@ -92,6 +98,7 @@ namespace PortalGalaxy.WebMvc.Controllers
                 }
 
                 ModelState.AddModelError("ErrorMessage", response.ErrorMessage ?? "Error");
+                modelo.ListaDepartamentos = await CargarDepartamentos();
                 return View(modelo);
             }
             catch (Exception ex)

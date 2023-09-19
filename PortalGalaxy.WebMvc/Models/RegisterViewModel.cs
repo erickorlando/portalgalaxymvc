@@ -7,5 +7,5 @@ public class RegisterViewModel
 {
     public RegisterDtoRequest Input { get; set; } = default!;
 
-    public List<SelectListItem> ListaDepartamentos { get; set; } = default!;
+    public List<SelectListItem> ListaDepartamentos { get; set; } = new List<SelectListItem>();
 }
