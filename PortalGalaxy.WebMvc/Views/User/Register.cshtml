@@ -3,74 +3,74 @@
 @{
     Layout = "_LayoutUser";
 }
-
-<form method="post">
-    <h3>Registrar usuario</h3>
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-floating mb-1">
-        <input asp-for="Input.Usuario" class="form-control" autocomplete="off" aria-required="true" />
-        <label asp-for="Input.Usuario" class="form-label">Usuario</label>
-        <span asp-validation-for="Input.Usuario" class="text-danger"></span>
-    </div>
-    <div class="form-floating mb-1">
-        <input asp-for="Input.NombreCompleto" class="form-control" autocomplete="off" aria-required="true" />
-        <label asp-for="Input.NombreCompleto" class="form-label">Nombres completos</label>
-        <span asp-validation-for="Input.NombreCompleto" class="text-danger"></span>
-    </div>
-    <div class="form-floating mb-1">
-        <input asp-for="Input.NroDocumento" class="form-control" autocomplete="off" aria-required="true" />
-        <label asp-for="Input.NroDocumento" class="form-label">Nro Documento</label>
-        <span asp-validation-for="Input.NroDocumento" class="text-danger"></span>
-    </div>
-    <div class="form-floating mb-1">
-        <input asp-for="Input.Email" class="form-control" autocomplete="off" aria-required="true" />
-        <label asp-for="Input.Email" class="form-label">Email</label>
-        <span asp-validation-for="Input.Email" class="text-danger"></span>
-    </div>
-    <div class="form-floating mb-1">
-        <input asp-for="Input.Telefono" class="form-control" autocomplete="off" aria-required="true" />
-        <label asp-for="Input.Telefono" class="form-label">Telefono</label>
-        <span asp-validation-for="Input.Telefono" class="text-danger"></span>
-    </div>
-    <div class="form-floating mb-1">
-        <input asp-for="Input.Password" type="password" class="form-control" autocomplete="off" aria-required="true" />
-        <label asp-for="Input.Password" class="form-label">Password</label>
-        <span asp-validation-for="Input.Password" class="text-danger"></span>
-    </div>
-    <div class="form-floating mb-1">
-        <input asp-for="Input.ConfirmarPassword" type="password" class="form-control" autocomplete="off" aria-required="true" />
-        <label asp-for="Input.ConfirmarPassword" class="form-label">Confirmar Password</label>
-        <span asp-validation-for="Input.ConfirmarPassword" class="text-danger"></span>
-    </div>
-    <div class="form-floating mb-1">
-        @Html.DropDownListFor(p => p.Input.CodigoDepartamento, Model.ListaDepartamentos, "-Seleccione-", new
-        {
-        @class = "form-select",
-        id = "ddlDpto"
-        })
-        <label asp-for="Input.CodigoDepartamento" class="form-label">Departamento</label>
-    </div>
-    <div class="form-floating mb-1">
-        @Html.DropDownListFor(p => p.Input.CodigoProvincia, new SelectList(Enumerable.Empty<SelectListItem>(), "Codigo", "Nombre"), "-Seleccione-", new
-        {
-        @class = "form-select",
-        id = "ddlProv"
-        })
-        <label asp-for="Input.CodigoProvincia" class="form-label">Provincia</label>
-    </div>
-    <div class="form-floating mb-1">
-        @Html.DropDownListFor(p => p.Input.CodigoDistrito, new SelectList(Enumerable.Empty<SelectListItem>(), "Codigo", "Nombre"), "-Seleccione-", new
-        {
-        @class = "form-select",
-        id = "ddlDist"
-        })
-        <label asp-for="Input.CodigoDistrito" class="form-label">Distrito</label>
-    </div>
-    <div>
-        <button type="submit" class="btn btn-lg btn-primary">Registrar</button>
-    </div>
-</form>
-
+<div class="col-11">
+    <form method="post">
+        <h3>Registrar usuario</h3>
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-floating mb-1">
+            <input asp-for="Input.Usuario" class="form-control" autocomplete="off" aria-required="true" />
+            <label asp-for="Input.Usuario" class="form-label">Usuario</label>
+            <span asp-validation-for="Input.Usuario" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-1">
+            <input asp-for="Input.NombreCompleto" class="form-control" autocomplete="off" aria-required="true" />
+            <label asp-for="Input.NombreCompleto" class="form-label">Nombres completos</label>
+            <span asp-validation-for="Input.NombreCompleto" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-1">
+            <input asp-for="Input.NroDocumento" class="form-control" autocomplete="off" aria-required="true" />
+            <label asp-for="Input.NroDocumento" class="form-label">Nro Documento</label>
+            <span asp-validation-for="Input.NroDocumento" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-1">
+            <input asp-for="Input.Email" class="form-control" autocomplete="off" aria-required="true" />
+            <label asp-for="Input.Email" class="form-label">Email</label>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-1">
+            <input asp-for="Input.Telefono" class="form-control" autocomplete="off" aria-required="true" />
+            <label asp-for="Input.Telefono" class="form-label">Telefono</label>
+            <span asp-validation-for="Input.Telefono" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-1">
+            <input asp-for="Input.Password" type="password" class="form-control" autocomplete="off" aria-required="true" />
+            <label asp-for="Input.Password" class="form-label">Password</label>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-1">
+            <input asp-for="Input.ConfirmarPassword" type="password" class="form-control" autocomplete="off" aria-required="true" />
+            <label asp-for="Input.ConfirmarPassword" class="form-label">Confirmar Password</label>
+            <span asp-validation-for="Input.ConfirmarPassword" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-1">
+            @Html.DropDownListFor(p => p.Input.CodigoDepartamento, Model.ListaDepartamentos, "-Seleccione-", new
+            {
+            @class = "form-select",
+            id = "ddlDpto"
+            })
+            <label asp-for="Input.CodigoDepartamento" class="form-label">Departamento</label>
+        </div>
+        <div class="form-floating mb-1">
+            @Html.DropDownListFor(p => p.Input.CodigoProvincia, new SelectList(Enumerable.Empty<SelectListItem>(), "Codigo", "Nombre"), "-Seleccione-", new
+            {
+            @class = "form-select",
+            id = "ddlProv"
+            })
+            <label asp-for="Input.CodigoProvincia" class="form-label">Provincia</label>
+        </div>
+        <div class="form-floating mb-1">
+            @Html.DropDownListFor(p => p.Input.CodigoDistrito, new SelectList(Enumerable.Empty<SelectListItem>(), "Codigo", "Nombre"), "-Seleccione-", new
+            {
+            @class = "form-select",
+            id = "ddlDist"
+            })
+            <label asp-for="Input.CodigoDistrito" class="form-label">Distrito</label>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-lg btn-primary">Registrar</button>
+        </div>
+    </form>
+</div>
 @section Scripts {
 
     <script>

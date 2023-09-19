@@ -10,15 +10,18 @@
     <title>Portal de Galaxy Training</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/PortalGalaxy.WebMvc.styles.css" asp-append-version="true" />
+    <link rel="icon" href="~/assets/images/favicon.png" />
 </head>
 <body>
-    <div class="container">
-        <div class="row justify-content-between">
-            <div class="col col-md-9">
+    <partial name="_Header" />
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-auto">
                 <img src="~/assets/images/fondologin.png" alt="Logo" />
             </div>
-            <div class="col col-md-3">
+            <div class="col-auto">
                 @BodyContent
+                <hr/>
             </div>
         </div>
     </div>
