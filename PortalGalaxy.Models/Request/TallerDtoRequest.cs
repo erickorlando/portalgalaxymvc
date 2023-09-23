@@ -27,7 +27,7 @@ namespace PortalGalaxy.Models.Request
         [Display(Name = "Temario")]
         public string? Base64Temario { get; set; }
 
-        public string? UrlPortada { get; set; }
-        public string? UrlTemario { get; set; }
+        public string? PortadaUrl { get; set; }
+        public string? TemarioUrl { get; set; }
     }
 }

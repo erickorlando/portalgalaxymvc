@@ -64,6 +64,8 @@ public class TallerController : Controller
             }
         };
 
+        vm.BusquedaInstructorViewModel.Categorias = vm.Categorias;
+
         return View(vm);
     }
 }

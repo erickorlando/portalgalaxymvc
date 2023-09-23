@@ -69,10 +69,12 @@ builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<ICategoriaService, CategoriaService>();
 builder.Services.AddTransient<IAlumnoService, AlumnoService>();
 builder.Services.AddTransient<ITallerService, TallerService>();
+builder.Services.AddTransient<IInstructorService, InstructorService>();
 
 builder.Services.AddTransient<IAlumnoRepository, AlumnoRepository>();
 builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddTransient<ITallerRepository, TallerRepository>();
+builder.Services.AddTransient<IInstructorRepository, InstructorRepository>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

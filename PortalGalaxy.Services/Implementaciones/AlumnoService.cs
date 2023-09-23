@@ -58,7 +58,7 @@ namespace PortalGalaxy.Services.Implementaciones
             catch (Exception ex)
             {
                 response.ErrorMessage = "Error al buscar el Alumno";
-                _logger.LogError(ex, "{ErroMessage} {Message}", ex.Message);
+                _logger.LogError(ex, "{ErroMessage} {Message}", response.ErrorMessage, ex.Message);
             }
 
             return response;
@@ -79,7 +79,7 @@ namespace PortalGalaxy.Services.Implementaciones
             catch (Exception ex)
             {
                 response.ErrorMessage = "Error al agregar";
-                _logger.LogError(ex, "{ErroMessage} {Message}", ex.Message);
+                _logger.LogError(ex, "{ErroMessage} {Message}", response.ErrorMessage, ex.Message);
             }
 
             return response;
@@ -107,7 +107,7 @@ namespace PortalGalaxy.Services.Implementaciones
             catch (Exception ex)
             {
                 response.ErrorMessage = "Error al actualizar";
-                _logger.LogError(ex, "{ErroMessage} {Message}", ex.Message);
+                _logger.LogError(ex, "{ErroMessage} {Message}", response.ErrorMessage, ex.Message);
             }
 
             return response;
@@ -127,7 +127,7 @@ namespace PortalGalaxy.Services.Implementaciones
             catch (Exception ex)
             {
                 response.ErrorMessage = "Error al eliminar";
-                _logger.LogError(ex, "{ErroMessage} {Message}", ex.Message);
+                _logger.LogError(ex, "{ErroMessage} {Message}", response.ErrorMessage, ex.Message);
             }
 
             return response;
@@ -149,7 +149,7 @@ namespace PortalGalaxy.Services.Implementaciones
             catch (Exception ex)
             {
                 response.ErrorMessage = "Error al listar eliminados";
-                _logger.LogError(ex, "{ErroMessage} {Message}", ex.Message);
+                _logger.LogError(ex, "{ErroMessage} {Message}", response.ErrorMessage, ex.Message);
             }
 
             return response;
@@ -169,7 +169,7 @@ namespace PortalGalaxy.Services.Implementaciones
             catch (Exception ex)
             {
                 response.ErrorMessage = "Error al reactivar";
-                _logger.LogError(ex, "{ErroMessage} {Message}", ex.Message);
+                _logger.LogError(ex, "{ErroMessage} {Message}", response.ErrorMessage, ex.Message);
             }
 
             return response;

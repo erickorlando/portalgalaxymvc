@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PortalGalaxy.Entities;
+using PortalGalaxy.Entities.Infos;
 using PortalGalaxy.Models.Request;
 using PortalGalaxy.Models.Response;
 
@@ -25,6 +26,10 @@ namespace PortalGalaxy.Services.Profiles
                 .ForMember(d => d.Fecha, o => o.MapFrom(x => $"{x.FechaInicio:dd/MM/yyyy} {x.HoraInicio:hh:mm tt}"));
 
             CreateMap<TallerDtoRequest, Taller>();
+
+            CreateMap<InstructorInfo, InstructorDtoResponse>();
+
+            CreateMap<InstructorDtoRequest, Instructor>();
         }
     }
 }

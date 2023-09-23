@@ -24,7 +24,8 @@
             @Html.LabelFor(m => m.Input.InstructorId, new { @class = "form-label"})
             <div class="input-group">
                 <input type="text" class="form-control" id="instructor"/>
-                <span class="input-group-text" id="addon-instructor"><i class="bi bi-person-bounding-box"></i></span>
+                <span class="input-group-text" id="addon-instructor" style="cursor: pointer"
+                      data-bs-toggle="modal" data-bs-target="#instructorModal"><i class="bi bi-person-bounding-box"></i></span>
             </div>
             @Html.HiddenFor(m => m.Input.InstructorId, new { id = "hiddenInstructorId"})
         </div>
@@ -59,13 +60,13 @@
                     <label class="text-white">Vista Previa</label>
                 </div>
                 <div class="card-body text-center">
-                    @if (string.IsNullOrEmpty(Model.Input.UrlPortada))
+                    @if (string.IsNullOrEmpty(Model.Input.PortadaUrl))
                     {
                         <img id="preview" src="~/assets/images/sinimagen.jpeg" alt="@Model.Input.Nombre" style="width: 300px"/>
                     }
                     else
                     {
-                        <img id="preview" src="@Model.Input.UrlPortada" alt="@Model.Input.Nombre" style="width: 300px"/>
+                        <img id="preview" src="@Model.Input.PortadaUrl" alt="@Model.Input.Nombre" style="width: 300px"/>
                     }
                 </div>
             </div>
@@ -78,6 +79,21 @@
         </div>
     </div>
 </form>
+@* Modal *@
+<div class="modal fade" id="instructorModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h1 class="modal-title fs-5">Buscar Instructor</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <partial name="_BusquedaInstructor" model="Model.BusquedaInstructorViewModel"/>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     document.getElementById("imageInput").addEventListener("change", function() {
         var previewImage = document.getElementById("preview");
@@ -94,4 +110,12 @@
             reader.readAsDataURL(imageInput.files[0]);
         }
     });
+
+    function seleccionaInstructor(id, nombre) {
+        let hiddenInstructorId = document.getElementById("hiddenInstructorId");
+        hiddenInstructorId.value = id;
+
+        let inputInstructor = document.getElementById("instructor");
+        inputInstructor.value = nombre;
+    }
 </script>

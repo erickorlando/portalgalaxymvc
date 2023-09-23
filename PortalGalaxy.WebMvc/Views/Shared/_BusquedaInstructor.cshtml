@@ -1,0 +1,77 @@
+﻿@model BusquedaInstructorViewModel
+
+<form id="busquedaInstructor">
+    <div asp-validation-summary="All"></div>
+    <div class="row mb-4">
+        <div class="col-8">
+            <label asp-for="Nombres" class="form-label"></label>
+            <input type="text" asp-for="Nombres" class="form-control" />
+        </div>
+        <div class="col-4">
+            <label asp-for="NroDocumento" class="form-label"></label>
+            <input type="text" asp-for="NroDocumento" class="form-control" />
+        </div>
+    </div>
+    <div class="row mt-2">
+        <div class="col-6">
+            <div>
+                <label asp-for="CategoriaSeleccionada" class="form-label"></label>
+                @Html.DropDownListFor(m => m.CategoriaSeleccionada, new List<SelectListItem>(Model.Categorias.Select(p => new SelectListItem(p.Nombre, p.Id.ToString()))), "Todos", new { @class = "form-select" })
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row mt-2">
+    <div class="col offset-8">
+        <button type="button" class="btn btn-outline-primary" onclick="cargarInstructores()">
+            <i class="bi bi-search me-1"></i> Buscar
+        </button>
+    </div>
+    <div class="col-auto">
+        <button type="button" class="btn btn-primary">
+            <i class="bi bi-plus-circle me-1"></i> Agregar
+        </button>
+    </div>
+</div>
+<div id="resultadoBusquedaInstructores" class="row mt-3">
+</div>
+<script>
+    function cargarInstructores() {
+
+        // JQuery
+        // let formData = $('#busquedaInstructor').serialize();
+
+        // $.ajax({
+        //     url: "/Instructor/Resultados",
+        //     type: "POST",
+        //     data: formData,
+        //     success: function (data) {
+        //         debugger;
+
+        //         $('#resultadoBusquedaInstructores').html(data);
+        //     }
+        // });
+
+        let formData = new FormData(document.getElementById("busquedaInstructor")); // datos del formulario
+
+        fetch("/Instructor/Resultados",
+            {
+                method: "POST",
+                body: formData
+
+            })
+        .then(function(response) {
+            if (response.ok) {
+                return response.text();
+            } else {
+                throw new Error("Error al buscar");
+            }
+        })
+        .then(function(data) {
+            document.getElementById("resultadoBusquedaInstructores").innerHTML = data;
+        })
+        .catch(function(error) {
+            console.error(error);
+        });
+    }
+</script>

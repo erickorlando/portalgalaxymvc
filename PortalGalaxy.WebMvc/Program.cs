@@ -19,6 +19,7 @@ builder.Services.AddScoped<IUserProxy, UserProxy>();
 builder.Services.AddScoped<IUbigeoProxy, UbigeoProxy>();
 builder.Services.AddScoped<ICategoriaProxy, CategoriaProxy>();
 builder.Services.AddScoped<ITallerProxy, TallerProxy>();
+builder.Services.AddScoped<IInstructorProxy, InstructorProxy>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>

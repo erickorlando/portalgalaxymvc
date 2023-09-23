@@ -16,4 +16,6 @@ public class FormTallerViewModel
         new() { Codigo = 2, Nombre = "Concluida" },
         new() { Codigo = 3, Nombre = "Cancelada" },
     };
+
+    public BusquedaInstructorViewModel BusquedaInstructorViewModel { get; set; } = new();
 }

@@ -60,7 +60,7 @@ namespace PortalGalaxy.Services.Implementaciones
                         predicate: predicate,
                         selector: x => _mapper.Map<TallerDtoResponse>(x),
                         orderBy: p => p.Nombre,
-                        relationships: "Instructor,Categoria",
+                        relationships: "Instructor,Categoria", // Eager Loading - EF Core
                         page,
                         rows);
 

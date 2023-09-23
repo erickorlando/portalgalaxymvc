@@ -24,6 +24,7 @@
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\Categoria\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Shared\_Header.cshtml" />
+    <_ContentIncludedByDefault Remove="Views\Shared\_ResultadosBusquedaInstructor.cshtml" />
     <_ContentIncludedByDefault Remove="Views\Taller\Index.cshtml" />
   </ItemGroup>
 
@@ -33,6 +34,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Shared\_Header.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shared\_ResultadosBusquedaInstructor.cshtml" />
   </ItemGroup>
 
 </Project>
