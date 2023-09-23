@@ -11,6 +11,7 @@ using PortalGalaxy.Services.Interfaces;
 using PortalGalaxy.Services.Profiles;
 using Serilog;
 using System.Text;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,6 +31,12 @@ builder.Services.AddDbContext<PortalGalaxyDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("GalaxyDatabase"));
     options.EnableSensitiveDataLogging();
+
+    options.ConfigureWarnings(p =>
+        p.Ignore(CoreEventId.PossibleIncorrectRequiredNavigationWithQueryFilterInteractionWarning));
+    
+    options.ConfigureWarnings(p =>
+        p.Ignore(CoreEventId.SensitiveDataLoggingEnabledWarning));
 });
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

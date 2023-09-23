@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using PortalGalaxy.Entities.Infos;
 
 namespace PortalGalaxy.DataAccess
 {
@@ -17,6 +18,9 @@ namespace PortalGalaxy.DataAccess
 
             // Se va a agregar la configuracion de las entidades desde este mismo ensamblado
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            modelBuilder.Entity<InstructorInfo>()
+                .HasNoKey(); // Esto no es una tabla
         }
     }
 }
