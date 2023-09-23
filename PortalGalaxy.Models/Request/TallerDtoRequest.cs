@@ -29,5 +29,7 @@ namespace PortalGalaxy.Models.Request
 
         public string? PortadaUrl { get; set; }
         public string? TemarioUrl { get; set; }
+        public string? ArchivoPortada { get; set; }
+        public string? ArchivoTemario { get; set; }
     }
 }

@@ -76,6 +76,8 @@ builder.Services.AddTransient<ICategoriaRepository, CategoriaRepository>();
 builder.Services.AddTransient<ITallerRepository, TallerRepository>();
 builder.Services.AddTransient<IInstructorRepository, InstructorRepository>();
 
+builder.Services.AddTransient<IFileUploader, AzureBlobStorageUploader>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

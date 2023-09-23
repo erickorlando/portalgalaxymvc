@@ -14,10 +14,12 @@ namespace PortalGalaxy.Services.Implementaciones
         private readonly ITallerRepository _repository;
         private readonly IMapper _mapper;
         private readonly ILogger<TallerService> _logger;
+        private readonly IFileUploader _fileUploader;
 
-        public TallerService(ITallerRepository repository, IMapper mapper, ILogger<TallerService> logger)
+        public TallerService(ITallerRepository repository, IMapper mapper, ILogger<TallerService> logger, IFileUploader fileUploader)
         {
             _logger = logger;
+            _fileUploader = fileUploader;
             _mapper = mapper;
             _repository = repository;
         }
@@ -29,7 +31,13 @@ namespace PortalGalaxy.Services.Implementaciones
 
             try
             {
-                await _repository.AddAsync(_mapper.Map<Taller>(request));
+                var entity = _mapper.Map<Taller>(request);
+
+                entity.PortadaUrl = await _fileUploader.UploadFileAsync(request.Base64Portada, request.ArchivoPortada);
+
+                entity.TemarioUrl = await _fileUploader.UploadFileAsync(request.Base64Temario, request.ArchivoTemario);
+
+                await _repository.AddAsync(entity);
                 response.Success = true;
             }
             catch (Exception ex)

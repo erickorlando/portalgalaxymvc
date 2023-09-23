@@ -7,27 +7,28 @@
 
 <h2 class="text-uppercase mt-2 mb-5">Crear Taller</h2>
 
-<form method="post">
+<form method="post" asp-controller="Taller" asp-action="Crear" enctype="multipart/form-data">
+    <div asp-validation-summary="All"></div>
     <div class="row gx-5 mb-3">
         <div class="col-7">
-            @Html.LabelFor(m => m.Input.Nombre, new { @class = "form-label"})
-            @Html.TextBoxFor(m => m.Input.Nombre, new { @class = "form-control"})
+            @Html.LabelFor(m => m.Input.Nombre, new { @class = "form-label" })
+            @Html.TextBoxFor(m => m.Input.Nombre, new { @class = "form-control" })
         </div>
         <div class="col-5">
-            @Html.LabelFor(m => m.Input.CategoriaId, new { @class = "form-label"})
+            @Html.LabelFor(m => m.Input.CategoriaId, new { @class = "form-label" })
             @Html.DropDownListFor(m => m.Input.CategoriaId,
-                new SelectList(Model.Categorias, "Id", "Nombre"), "Todos", new { @class = "form-select"})
+                new SelectList(Model.Categorias, "Id", "Nombre"), "Todos", new { @class = "form-select" })
         </div>
     </div>
     <div class="row">
         <div class="col">
-            @Html.LabelFor(m => m.Input.InstructorId, new { @class = "form-label"})
+            @Html.LabelFor(m => m.Input.InstructorId, new { @class = "form-label" })
             <div class="input-group">
                 <input type="text" class="form-control" id="instructor"/>
                 <span class="input-group-text" id="addon-instructor" style="cursor: pointer"
                       data-bs-toggle="modal" data-bs-target="#instructorModal"><i class="bi bi-person-bounding-box"></i></span>
             </div>
-            @Html.HiddenFor(m => m.Input.InstructorId, new { id = "hiddenInstructorId"})
+            @Html.HiddenFor(m => m.Input.InstructorId, new { id = "hiddenInstructorId" })
         </div>
         <div class="col">
             <label asp-for="Input.FechaInicio" class="form-label"></label>
@@ -38,14 +39,14 @@
             <input type="time" asp-for="Input.HoraInicio" asp-format="HH:mm" class="form-control"/>
         </div>
         <div class="col">
-            @Html.LabelFor(m => m.Input.Situacion, new { @class = "form-label"})
-            @Html.DropDownListFor(m => m.Input.Situacion, 
-                new SelectList(Model.Situaciones, "Codigo", "Nombre"), "Todos", new { @class = "form-select"})
+            @Html.LabelFor(m => m.Input.Situacion, new { @class = "form-label" })
+            @Html.DropDownListFor(m => m.Input.Situacion,
+                new SelectList(Model.Situaciones, "Codigo", "Nombre"), "Todos", new { @class = "form-select" })
         </div>
     </div>
     <div class="row mt-3">
         <div class="col">
-            <label asp-for="Input.Base64Portada" class="form-label"></label>    
+            <label asp-for="Input.Base64Portada" class="form-label"></label>
             <input asp-for="Input.Base64Portada" type="file" class="form-control" accept="image/png, image/jpeg, image/webp" id="imageInput" name="imageFile"/>
         </div>
         <div class="col">

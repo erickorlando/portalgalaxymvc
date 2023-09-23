@@ -7,6 +7,7 @@ namespace PortalGalaxy.Common
     public class AppConfiguration
     {
         public Jwt Jwt { get; set; }
+        public AzureBlobStorage AzureBlobStorage { get; set; }
     }
 
     public class Jwt
@@ -16,4 +17,9 @@ namespace PortalGalaxy.Common
         public string Emisor { get; set; }
     }
 
+    public class AzureBlobStorage
+    {
+        public string ConnectionString { get; set; }
+        public string PublicUrl { get; set; }
+    }
 }
