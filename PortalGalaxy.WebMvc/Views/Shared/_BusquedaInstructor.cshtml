@@ -28,7 +28,7 @@
         </button>
     </div>
     <div class="col-auto">
-        <button type="button" class="btn btn-primary">
+        <button type="button" class="btn btn-primary" onclick="crearInstructor()">
             <i class="bi bi-plus-circle me-1"></i> Agregar
         </button>
     </div>
@@ -72,6 +72,20 @@
         })
         .catch(function(error) {
             console.error(error);
+        });
+    }
+
+    function crearInstructor() {
+        let formData = $('#busquedaInstructor').serialize();
+
+        $.ajax({
+            url: "/Instructor/Registrar",
+            type: "POST",
+            data: formData,
+            success: function(data) {
+                document.getElementById("busquedaInstructor").reset();
+                cargarInstructores();
+            }
         });
     }
 </script>

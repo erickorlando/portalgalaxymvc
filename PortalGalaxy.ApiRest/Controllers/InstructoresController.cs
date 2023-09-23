@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PortalGalaxy.Models.Request;
 using PortalGalaxy.Services.Interfaces;
 
 namespace PortalGalaxy.ApiRest.Controllers;
@@ -23,35 +24,35 @@ public class InstructoresController : ControllerBase
         return Ok(response);
     }
 
-    //[HttpGet("{id}")]
-    //public async Task<IActionResult> Get(int id)
-    //{
-    //    var response = await _service.GetAsync(id);
+    [HttpGet("{id}")]
+    public async Task<IActionResult> Get(int id)
+    {
+        var response = await _service.FindByIdAsync(id);
 
-    //    return response.Success ? Ok(response) : NotFound(response);
-    //}
+        return response.Success ? Ok(response) : NotFound(response);
+    }
 
-    //[HttpPost]
-    //public async Task<IActionResult> Post(InstructorDtoRequest request)
-    //{
-    //    var response = await _service.AddAsync(request);
+    [HttpPost]
+    public async Task<IActionResult> Post(InstructorDtoRequest request)
+    {
+        var response = await _service.AddAsync(request);
 
-    //    return response.Success ? Ok(response) : BadRequest(response);
-    //}
+        return response.Success ? Ok(response) : BadRequest(response);
+    }
 
-    //[HttpPut("{id}")]
-    //public async Task<IActionResult> Put(int id, InstructorDtoRequest request)
-    //{
-    //    var response = await _service.UpdateAsync(id, request);
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Put(int id, InstructorDtoRequest request)
+    {
+        var response = await _service.UpdateAsync(id, request);
 
-    //    return response.Success ? Ok(response) : NotFound(response);
-    //}
+        return response.Success ? Ok(response) : NotFound(response);
+    }
 
-    //[HttpDelete("{id}")]
-    //public async Task<IActionResult> Delete(int id)
-    //{
-    //    var response = await _service.DeleteAsync(id);
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        var response = await _service.DeleteAsync(id);
 
-    //    return response.Success ? Ok(response) : NotFound(response);
-    //}
+        return response.Success ? Ok(response) : NotFound(response);
+    }
 }

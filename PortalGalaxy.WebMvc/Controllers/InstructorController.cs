@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PortalGalaxy.Models.Request;
 using PortalGalaxy.ViewModels;
+using PortalGalaxy.ViewModels.Exceptions;
 using PortalGalaxy.WebMvc.Services.Interfaces;
 
 namespace PortalGalaxy.WebMvc.Controllers;
@@ -47,6 +49,48 @@ public class InstructorController : Controller
         catch (Exception ex)
         {
             _logger.LogError(ex, "Busqueda de Instructores {Message}", ex.Message);
+            return PartialView("_ResultadosBusquedaInstructor", model);
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Registrar(BusquedaInstructorViewModel model)
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(model.Nombres))
+            {
+                throw new ModelException(nameof(model.Nombres), "El nombre esta vacio");
+            }
+
+            if (string.IsNullOrWhiteSpace(model.NroDocumento))
+            {
+                throw new ModelException(nameof(model.NroDocumento), "El Nro. de Documento, no puede estar vacio");
+            }
+
+            if (model.CategoriaSeleccionada is null)
+            {
+                throw new ModelException(nameof(model.CategoriaSeleccionada), "Seleccione una Categoria");
+            }
+
+            await _proxy.CreateAsync(new InstructorDtoRequest
+            {
+                Nombres = model.Nombres,
+                NroDocumento = model.NroDocumento,
+                CategoriaId = model.CategoriaSeleccionada.Value
+            });
+
+            return PartialView("_ResultadosBusquedaInstructor", model);
+        }
+        catch (ModelException ex)
+        {
+            ModelState.AddModelError(ex.PropertyName, ex.Message);
+            _logger.LogError(ex, "Validacion de Registro {Message}", ex.Message);
+            return PartialView("_ResultadosBusquedaInstructor", model);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Registro de Instructores {Message}", ex.Message);
             return PartialView("_ResultadosBusquedaInstructor", model);
         }
     }
